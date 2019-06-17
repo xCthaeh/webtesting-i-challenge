@@ -200,8 +200,43 @@ describe("GAME TEST SUITE", () => {
         };
 
         test("Repaired the windshear weapon.", () => {
-          expect(enhance.repair(miraaks)).toEqual(repairedWeapon);
-          
+          expect(enhance.repair(windshear)).toEqual(repairedWeapon);
+        });
+      });
+
+      describe("GET ITEM TESTS", () => {
+        it("Should return the item not modified in any way", () => {
+          const item = {
+            name: "chillrend",
+            type: "weapon",
+            durability: 100,
+            enhancement: 0
+          };
+
+          const newItem = mockGet.get(item);
+
+          expect(mockGet.get).toBeCalled();
+          expect(mockGet.get).toBeCalledWith(item);
+          expect(newItem).toEqual(item);
+        });
+
+        it("Should return the item with the enhancement level and the name", () => {
+          const item = {
+            name: "chillrend",
+            durability: 7,
+            enhancement: 7
+          };
+          const expected = {
+            name: "[+7] chillrend",
+            durability: 7,
+            enhancement: 7
+          };
+
+          const newItem = mockGet.get(item);
+
+          expect(mockGet.get).toBeCalled();
+          expect(mockGet.get).toBeCalledWith(item);
+          expect(newItem).toEqual(expected);
         });
       });
     });
