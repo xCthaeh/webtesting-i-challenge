@@ -76,5 +76,107 @@ describe("GAME TEST SUITE", () => {
     test("Increase weapon enhancement by 1 above 15", () => {
       expect(enhance.success(daedric_warhammer)).toEqual(expectedWeaponAbove15);
     });
+
+    describe("FAIL METHOD", () => {
+      const failedWeaponBelow14 = {
+        origName: "harkons_sword",
+        name: "harkons_sword",
+        type: "weapon",
+        durability: 90,
+        enhancement: 12
+      };
+
+      test("Failed - weapon below level 14 ehancement", () => {
+        expect(enhance.fail(harkons_sword)).toEqual(failedWeaponBelow14);
+      });
+
+      const failedWeaponBelow16 = {
+        origName: "dragonbane",
+        name: "dragonbane",
+        type: "weapon",
+        durability: 90,
+        enhancement: 14
+      };
+
+      test("Failed - weapon below level 16 ehancement", () => {
+        expect(enhance.fail(dragonbane)).toEqual(failedWeaponBelow16);
+      });
+
+      const failedWeaponAbove16 = {
+        origName: "bloodscythe",
+        name: "bloodscythe",
+        type: "weapon",
+        durability: 100,
+        enhancement: 17
+      };
+
+      test("Failed - weapon above level 16 ehancement", () => {
+        expect(enhance.fail(bloodscythe)).toEqual(failedWeaponAbove16);
+      });
+
+      const failedArmorBelow14 = {
+        origName: "dragonscale",
+        name: "dragonscale",
+        type: "armor",
+        durability: 90,
+        enhancement: 7
+      };
+
+      test("Failed - armor below level 14 enhancement", () => {
+        expect(enhance.fail(dragonscale)).toEqual(failedArmorBelow14);
+      });
+
+      const failedArmorBelow16 = {
+        origName: "deathbrand",
+        name: "deathbrand",
+        type: "armor",
+        durability: 90,
+        enhancement: 15
+      };
+
+      test("Failed - armor less than or equal to 16", () => {
+        expect(enhance.fail(deathbrand)).toEqual(failedArmorBelow16);
+      });
+
+      const failedArmorAbove16 = {
+        origName: "vampire_royal",
+        name: "vampire_royal",
+        type: "armor",
+        durability: 100,
+        enhancement: 17
+      };
+
+      test("Failed - armor above level 16 ehancement", () => {
+        expect(enhance.fail(vampire_royal)).toEqual(failedArmorAbove16);
+      });
+
+      const lowArmorEnhancement = {
+        origName: "archmages",
+        name: "archmages",
+        type: "armor",
+        durability: 100,
+        enhancement: 2
+      };
+
+      test("Armor enhancement level less than or equal to 5", () => {
+        expect(enhance.fail(archmages)).toBe(
+          "Armor below level 5 enhancement cannot fail."
+        );
+      });
+
+      const lowWeaponEnhancement = {
+        origName: "dwarven_crossbow",
+        name: "dwarven_crossbow",
+        type: "weapon",
+        durability: 100,
+        enhancement: 15
+      };
+
+      test("Weapon enhancements level less than or equal to 7", () => {
+        expect(enhance.fail(dwarven_crossbow)).toEqual(
+          "Weapons below level 7 ehancement cannot fail."
+        );
+      });
+    });
   });
 });
