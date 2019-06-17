@@ -11,7 +11,6 @@ module.exports = {
 //- The durability of the item is not changed.
 
 function succeed(item) {
-  
   if (item.enhancement >= 0 && item.enhancement <= 15) {
     item.enhancement += 1;
     item.name = `[+${item.enhancement}] ${item.origName}`;
@@ -49,7 +48,33 @@ function succeed(item) {
 //- If the item's enhancement level is greater than 16, the enhancement level decreases by 1 (17 goes down to 16, 18 goes down to 17).
 
 function fail(item) {
-  return { ...item };
+  if (item.enhancement >= 0 && item.enhancement <= 14) {
+    item.durability -= 5;
+  } else if (item.enhancement > 14 && item.enhancement <= 16) {
+    item.durability -= 10;
+  } else if (item.enhancement === 17) {
+    item.enhancement -= 1;
+    item.name = `[PRI] ${item.origName}`;
+  } else if (item.enhancement === 18) {
+    item.enhancement -= 1;
+    item.name = `[DUO] ${item.origName}`;
+  } else if (item.enhancement === 19) {
+    item.enhancement -= 1;
+    item.name = `[TRI] ${item.origName}`;
+  } else if (item.enhancement === 20) {
+    item.enhancement -= 1;
+    item.name = `[TET] ${item.origName}`;
+  }
+
+  if (item.type === "armor" && item.enhancement <= 5) {
+    return "Armor below level 5 have 100% success rate.";
+  }
+
+  if (item.type === "weapon" && item.enhancement <= 7) {
+    return "Weapons below level 7 have 100% success rate.";
+  }
+
+  return item;
 }
 
 //- a `repair(item)` method that accepts an `item` object and **returns a new item** with the durability restored to 100.
