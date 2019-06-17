@@ -177,6 +177,33 @@ describe("GAME TEST SUITE", () => {
           "Weapons below level 7 ehancement cannot fail."
         );
       });
+
+      describe("REPAIR METHOD", () => {
+        const repairedArmor = {
+          origName: "miraaks",
+          name: "miraaks",
+          type: "armor",
+          durability: 100,
+          enhancement: 0
+        };
+
+        test("Repaired the miraaks armor.", () => {
+          expect(enhance.repair(miraaks)).toEqual(repairedArmor);
+        });
+
+        const repairedWeapon = {
+          origName: "windshear",
+          name: "windshear",
+          type: "weapon",
+          durability: 100,
+          enhancement: 0
+        };
+
+        test("Repaired the windshear weapon.", () => {
+          expect(enhance.repair(miraaks)).toEqual(repairedWeapon);
+          
+        });
+      });
     });
   });
 });
