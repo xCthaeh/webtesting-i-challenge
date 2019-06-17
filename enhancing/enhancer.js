@@ -29,15 +29,15 @@ function fail(item) {
 //This method is the simplest of the three and would be a **good starting point** on this project.
 
 function repair(item) {
-      const repairedItem = {
-      origName: item.origName,
-      name: item.name,
-      type: item.type,
-      durability: 100,
-      enhancement: item.enhancement
-    };
-  
-    return repairedItem;
+  const repairedItem = {
+    origName: item.origName,
+    name: item.name,
+    type: item.type,
+    durability: 100,
+    enhancement: item.enhancement
+  };
+
+  return repairedItem;
 }
 
 function get(item) {
